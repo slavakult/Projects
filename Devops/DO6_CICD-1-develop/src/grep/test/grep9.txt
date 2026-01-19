@@ -1,0 +1,2 @@
+./test/t.txt:1
+./test/t1.txt:0

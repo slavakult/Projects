@@ -1,0 +1,2 @@
+./test/t.txt:    heloo
+./test/t1.txt:flagf

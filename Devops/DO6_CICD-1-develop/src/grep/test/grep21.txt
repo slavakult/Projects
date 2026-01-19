@@ -1,0 +1,22 @@
+./test/t.txt:jadgsfjkgad
+./test/t.txt:adgvkjsdbkjv
+./test/t.txt:hvdzhfbad
+./test/t.txt:&&&
+./test/t.txt:^&^&^
+./test/t.txt:{}}}{}{
+./test/t.txt:    adlkknl
+./test/t.txt:    gchaas
+./test/t.txt:
+./test/t.txt:    sdasf
+./test/t.txt:    safsa
+./test/t.txt:    fasf
+./test/t.txt:    safsafsa
+./test/t.txt:    fasfasa
+./test/t.txt:}
+./test/t.txt:2
+./test/t1.txt:sgfgf
+./test/t1.txt:sdfagsyf
+./test/t1.txt:asfgya
+./test/t1.txt:****
+./test/t1.txt:flagf
+./test/t1.txt:asgaf

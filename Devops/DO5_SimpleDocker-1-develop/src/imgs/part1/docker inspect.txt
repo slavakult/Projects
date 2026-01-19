@@ -1,0 +1,5 @@
+"Size": 187706879 (байт)
+"ShmSize": 67108864
+"ExposedPorts": { "80/tcp": {} }
+
+"IPAddress": "172.17.0.2"

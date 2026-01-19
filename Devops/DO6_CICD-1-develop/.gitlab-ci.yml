@@ -1,0 +1,61 @@
+stages:
+    - style
+    - build
+    - test
+    - deploy
+  
+style-job:
+  stage: style
+  tags:
+    - style
+  script:
+    - clang-format -style=Google -Werror -n src/cat/s21_cat.* src/grep/s21_grep.*
+  only:
+    - develop
+  after_script:
+    - bash ci/notify.sh "Style stage finished"
+
+build-job:
+  stage: build
+  tags:
+    - build
+  script:
+    - cd src/cat && make s21_cat && cd ./../grep && make s21_grep
+  artifacts:
+    paths:
+      - src/cat/s21_cat
+      - src/grep/s21_grep
+    expire_in: 30 days
+  only:
+    - develop
+  after_script:
+    - bash ci/notify.sh "Build stage finished"
+
+test-job:
+  stage: test
+  tags:
+    - test
+  script:
+    - (cd src/cat && make test) 
+    - (cd src/grep && make test) 
+  only:
+    - develop
+  after_script:
+    - bash ci/notify.sh "Test stage finished"
+
+deploy-job:
+  stage: deploy
+  tags:
+    - deploy
+  when: manual
+  script:
+    - ./ci/deploy_script.sh
+  dependencies:
+    - build-job
+    - style-job
+    - test-job
+  only:
+    - develop
+  after_script:
+    - bash ci/notify.sh "Deploy stage finished"
+
