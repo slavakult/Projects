@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://petloversclub.ru/petService/pet.wsdl"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+
+	name="PetService"
+	targetNamespace="http://petloversclub.ru/petService/pet.wsdl">
+
+	<documentation>
+		Определение веб-сервиса "Pet", который позволяет
+        осуществлять поиск питомцев членов клуба любителей животных (БД - pet), добавление новых питомцев,
+        обновление информации о питомцах, удаление записи о питомце
+	</documentation>
+
+    <types>
+        <xsd:schema targetNamespace="http://petloversclub.ru/petService/pet.wsdl">
+            <xsd:element name="Pet">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:int"/>
+                        <xsd:element name="member_id" type="xsd:int"/>
+                        <xsd:element name="name" type="xsd:string"/>
+                        <xsd:element name="kind" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="PetList">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="pet" type="tns:Pet" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="PetDataInput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:int" minOccurs="0"/>
+                        <xsd:element name="name" type="xsd:string"/>
+                        <xsd:element name="kind" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="AddPetRequest">
+        <part name="parameters" element="tns:PetDataInput"/>
+    </message>
+    <message name="AddPetResponse">
+        <part name="success" type="xsd:boolean"/>
+    </message>    
+    
+    <message name="GetAllPetsRequest"/>
+
+    <message name="GetAllPetsResponse">
+        <part name="pets" element="tns:PetList"/>
+    </message>
+
+    <message name="GetPetsByMemberIdRequest">
+        <part name="member_id" type="xsd:int"/>
+    </message>
+    <message name="GetPetsByMemberIdResponse">
+        <part name="pets" element="tns:PetList"/>
+    </message>
+
+    <message name="UpdatePetRequest">
+        <part name="parameters" element="tns:PetDataInput"/>
+    </message>
+    <message name="UpdatePetResponse">
+        <part name="success" type="xsd:boolean"/>
+    </message>
+
+    <message name="DeletePetRequest">
+        <part name="id" type="xsd:int"/>
+    </message>
+    <message name="DeletePetResponse">
+        <part name="success" type="xsd:boolean"/>
+    </message>
+
+
+    <portType name="PetPortType">
+
+        <operation name="AddPet">
+            <input message="tns:AddPetRequest"/>
+            <output message="tns:AddPetResponse"/>
+        </operation>
+
+        <operation name="GetAllPets">
+            <input message="tns:GetAllPetsRequest"/>
+            <output message="tns:GetAllPetsResponse"/>
+        </operation>
+
+        <operation name="GetPetsByMemberId">
+            <input message="tns:GetPetsByMemberIdRequest"/>
+            <output message="tns:GetPetsByMemberIdResponse"/>
+        </operation>
+
+        <operation name="UpdatePet">
+            <input message="tns:UpdatePetRequest"/>
+            <output message="tns:UpdatePetResponse"/>
+        </operation>
+
+        <operation name="DeletePet">
+            <input message="tns:DeletePetRequest"/>
+            <output message="tns:DeletePetResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="PetSoapBinding" type="tns:PetPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <operation name="AddPet">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="GetAllPets">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="GetPetsByMemberId">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="UpdatePet">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="DeletePet">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="PetService">
+        <port name="PetSoap" binding="tns:PetSoapBinding">
+            <soap:address location="http://petloversclub.ru/petService"/>
+        </port>
+    </service>
+
+</definitions>

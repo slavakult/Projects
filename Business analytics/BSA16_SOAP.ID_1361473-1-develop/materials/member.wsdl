@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://petloversclub.ru/memberService/member.wsdl"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+
+	name="MemberService"
+	targetNamespace="http://petloversclub.ru/memberService/member.wsdl">
+
+	<documentation>
+		Определение веб-сервиса "Member", который позволяет
+        осуществлять поиск членов клуба любителей животных (БД - member), добавление новых членов клуба,
+        обновление информации о члене клуба, удаление записи о члене клуба
+	</documentation>
+
+    <types>
+            <xsd:schema targetNamespace="http://petloversclub.ru/memberService/member.wsdl">
+                <xsd:element name="Member">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="id" type="xsd:int"/>
+                            <xsd:element name="name" type="xsd:string"/>
+                            <xsd:element name="email" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="MemberList">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="member" type="tns:Member" minOccurs="0" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="MemberDataInput">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="id" type="xsd:int" minOccurs="0"/>
+                            <xsd:element name="name" type="xsd:string"/>
+                            <xsd:element name="email" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:schema>
+    </types>
+
+    <message name="AddMemberRequest">
+        <part name="parameters" element="tns:MemberDataInput"/>
+    </message>
+    <message name="AddMemberResponse">
+        <part name="success" type="xsd:boolean"/>
+    </message>
+
+    <message name="GetAllMembersRequest"/>
+
+    <message name="GetAllMembersResponse">
+        <part name="members" element="tns:MemberList"/>
+    </message>
+
+    <message name="GetMemberByNameRequest">
+        <part name="name" type="xsd:string"/>
+    </message>
+    <message name="GetMemberByNameResponse">
+        <part name="member" element="tns:Member"/>
+    </message>
+
+    <message name="UpdateMemberRequest">
+        <part name="parameters" element="tns:MemberDataInput"/>
+    </message>
+    <message name="UpdateMemberResponse">
+        <part name="success" type="xsd:boolean"/>
+    </message>
+
+    <message name="DeleteMemberRequest">
+        <part name="id" type="xsd:int"/>
+    </message>
+    <message name="DeleteMemberResponse">
+        <part name="success" type="xsd:boolean"/>
+    </message>
+
+    <portType name="MemberPortType">
+
+        <operation name="AddMember">
+            <input message="tns:AddMemberRequest"/>
+            <output message="tns:AddMemberResponse"/>
+        </operation>
+
+        <operation name="GetAllMembers">
+            <input message="tns:GetAllMembersRequest"/>
+            <output message="tns:GetAllMembersResponse"/>
+        </operation>
+
+        <operation name="GetMemberByName">
+            <input message="tns:GetMemberByNameRequest"/>
+            <output message="tns:GetMemberByNameResponse"/>
+        </operation>
+
+        <operation name="UpdateMember">
+            <input message="tns:UpdateMemberRequest"/>
+            <output message="tns:UpdateMemberResponse"/>
+        </operation>
+
+        <operation name="DeleteMember">
+            <input message="tns:DeleteMemberRequest"/>
+            <output message="tns:DeleteMemberResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="MemberSoapBinding" type="tns:MemberPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <operation name="AddMember">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        
+        <operation name="GetAllMembers">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="GetMemberByName">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="UpdateMember">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="DeleteMember">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="MemberService">
+        <port name="MemberSoap" binding="tns:MemberSoapBinding">
+            <soap:address location="http://petloversclub.ru/memberService"/>
+        </port>
+    </service>
+
+</definitions>
